@@ -31,6 +31,8 @@ val scrimLight = Color(0xFF000000)
 val inverseSurfaceLight = Color(0xFF322F37)
 val inverseOnSurfaceLight = Color(0xFFF5EEFA)
 val inversePrimaryLight = Color(0xFFCDBDFF)
+val loginBtn = Color(0xFFE5E5E5)
+
 
 val primaryDark = Color(0xFFCDBDFF)
 val onPrimaryDark = Color(0xFF370095)

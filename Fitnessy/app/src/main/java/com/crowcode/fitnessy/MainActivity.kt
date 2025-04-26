@@ -6,12 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -20,17 +17,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.crowcode.fitnessy.onboard.ButtonUi
 import com.crowcode.fitnessy.onboard.OnboardingScreen
 import com.crowcode.fitnessy.onboard.OnboardingUtils
 import com.crowcode.fitnessy.ui.theme.FitnessyTheme
+import com.crowcode.fitnessy.ui.theme.loginBtn
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -52,8 +53,6 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     private fun HomeScreen() {
-//        val context = LocalContext.current
-//        val intent = Intent(context, HomeActivity::class.java)
 
         Scaffold(
             modifier = Modifier.fillMaxSize()
@@ -64,9 +63,11 @@ class MainActivity : AppCompatActivity() {
                     .padding(innerPadding)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.home),
+                    painter = painterResource(id = R.drawable.welcome),
                     contentDescription = "just an image",
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(bottom = 12.dp)
+                        .fillMaxWidth(),
                     contentScale = ContentScale.FillWidth
                 )
                 Text(
@@ -76,7 +77,22 @@ class MainActivity : AppCompatActivity() {
                         fontSize = 32.sp
                     )
                 )
-
+                Text(
+                    text = "Get fit and stay healthy with our easy-to-use app.",
+                    modifier = Modifier
+                        .padding(vertical = 16.dp)
+                        .fillMaxWidth()
+                        .padding(26.dp, 0.dp),
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = TextStyle(
+                        fontWeight = FontWeight.W400,
+                        fontSize = 16.sp,
+                        letterSpacing = 1.1.sp
+                    )
+                )
+                LoginButton()
+                SignUpButton()
             }
         }
     }
@@ -99,4 +115,44 @@ class MainActivity : AppCompatActivity() {
     fun HomeScreenPreview() {
         HomeScreen()
     }
+
+
+    @Preview
+    @Composable
+    fun LoginButton() {
+        val context = LocalContext.current
+        val i = Intent(context, LoginActivity::class.java)
+        ButtonUi(
+            text = "Login",
+            fontSize = 16,
+            backgroundColor = loginBtn,
+            textColor = Color.Black,
+            modifier = Modifier
+                .padding(horizontal = 32.dp)
+                .padding(top = 24.dp)
+                .fillMaxWidth()
+
+        ) {
+            context.startActivity(i)
+        }
+    }
+
+
+    @Preview
+    @Composable
+    fun SignUpButton() {
+        val context = LocalContext.current
+        val i = Intent(context, LoginActivity::class.java)
+        ButtonUi(
+            text = "Sign Up",
+            fontSize = 16,
+            modifier = Modifier
+                .padding(horizontal = 32.dp)
+                .padding(top = 10.dp)
+                .fillMaxWidth()
+        ) {
+            context.startActivity(i)
+        }
+    }
+
 }
