@@ -3,4 +3,4 @@ a mobile app that allows users to log their daily fitness activities, set goals,
 
 [open UI with figma](https://www.figma.com/design/b9gaIC5dd1XXvIUMAN4Zqr/FitPal-health-and-fitness-mockups-(Community)?node-id=0-1&t=55rYBMQnqfKz24EQ-1)
 
-![UI](Fitness tracker.gif)
+![UI](fitness_tracker.gif)
