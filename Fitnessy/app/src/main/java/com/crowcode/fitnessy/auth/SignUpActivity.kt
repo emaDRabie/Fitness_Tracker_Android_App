@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.crowcode.fitnessy.MainActivity
 import com.crowcode.fitnessy.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -62,6 +64,11 @@ class SignUpActivity : AppCompatActivity() {
         alreadyUserTv.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        }
+        val arrowBack = findViewById<ImageButton>(R.id.arrowBack)
+        arrowBack.setOnClickListener {
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
         }
     }
 
