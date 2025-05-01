@@ -27,6 +27,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.crowcode.fitnessy.auth.LoginActivity
+import com.crowcode.fitnessy.auth.SignUpActivity
 import com.crowcode.fitnessy.onboard.ButtonUi
 import com.crowcode.fitnessy.onboard.OnboardingScreen
 import com.crowcode.fitnessy.onboard.OnboardingUtils
@@ -142,7 +144,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     fun SignUpButton() {
         val context = LocalContext.current
-        val i = Intent(context, LoginActivity::class.java)
+        val i = Intent(context, SignUpActivity::class.java)
         ButtonUi(
             text = "Sign Up",
             fontSize = 16,

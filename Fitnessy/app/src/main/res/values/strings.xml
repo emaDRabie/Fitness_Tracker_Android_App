@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Fitnessy</string>
     <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="email">Email</string>
+    <string name="password">Password\n</string>
+    <string name="login">Login</string>
+    <string name="already_a_user">Already a user?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="not_a_user">Not a user?</string>
 </resources>

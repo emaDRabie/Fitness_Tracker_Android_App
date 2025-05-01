@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".auth.LoginActivity">
+    tools:context=".auth.SignUpActivity">
 
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/welcome" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="64dp"
-        android:inputType="textEmailAddress">
+        android:inputType="textEmailAddress"
+        app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_et"
@@ -50,46 +51,48 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <TextView
-        android:id="@+id/forgot_pass_tv"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:text="@string/forgot_your_password"
-        android:textColor="#2196F3" />
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:inputType="textPassword"
+        app:endIconMode="password_toggle">
 
-    <CheckBox
-        android:id="@+id/remember_me_cb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="10dp"
-        android:checked="true"
-        android:text="Remember me next time?"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/con_pass_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_btn"
+        android:id="@+id/sign_up_btn"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:backgroundTint="#CD3F3A"
-        android:text="@string/login"
+        android:text="@string/sign_up"
+        android:textColor="#ECE7EA"
         android:textSize="24sp"
-        android:textStyle="italic|bold"
-        app:cornerRadius="30sp"
-        app:icon="@drawable/person_svgrepo_com"
+        android:textStyle="bold|italic"
+        app:cornerRadius="30dp"
+        app:icon="@drawable/ic_person_add"
         app:iconGravity="start"
         app:iconSize="24dp" />
 
     <TextView
-        android:id="@+id/not_user_tv"
+        android:id="@+id/already_user_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="@string/not_a_user"
+        android:text="@string/already_a_user"
         android:textColor="#2196F3" />
 
     <ProgressBar

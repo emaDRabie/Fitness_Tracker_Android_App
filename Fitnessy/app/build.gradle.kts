@@ -2,11 +2,16 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.crowcode.fitnessy"
     compileSdk = 35
+
+    buildFeatures {
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.crowcode.fitnessy"
@@ -64,7 +69,18 @@ dependencies {
     // splash api
     implementation(libs.androidx.core.splashscreen)
 
+    // firebase
+    implementation(platform(libs.firebase.bom)) // Bill of materials, to update any lib version
+    implementation(libs.firebase.auth)
 
+    // api
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.glide)
+    implementation(libs.logging.interceptor)
 
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.swiperefreshlayout)
 
 }
