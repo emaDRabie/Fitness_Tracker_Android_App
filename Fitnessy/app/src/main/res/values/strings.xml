@@ -10,4 +10,9 @@
     <string name="forgot_your_password">Forgot password?</string>
     <string name="not_a_user">Not a user?</string>
     <string name="welcome_back_to_fitnessy">Welcome Back To Fitnessy!</string>
+    <string name="create_user">Create User</string>
+    <string name="let_s_get_started">Let\'s get started!</string>
+    <string name="display_name">Display Name</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="set_your_goals">Set your goals!</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.crowcode.fitnessy.Dashboard.DashboardActivity
+import com.crowcode.fitnessy.Dashboard.UserSetupActivity
 import com.crowcode.fitnessy.MainActivity
 import com.crowcode.fitnessy.R
 import com.google.firebase.auth.FirebaseAuth
@@ -110,7 +111,7 @@ class LoginActivity : AppCompatActivity() {
                     if (auth.currentUser!!.isEmailVerified) {
                         Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
                         // Start CategoryActivity after successful login
-                        startActivity(Intent(this, DashboardActivity::class.java))
+                        startActivity(Intent(this, UserSetupActivity::class.java))
                         finish() // Close the login screen
                     } else
                         Toast.makeText(this, "CHECK YOUR EMAIL!", Toast.LENGTH_SHORT).show()
