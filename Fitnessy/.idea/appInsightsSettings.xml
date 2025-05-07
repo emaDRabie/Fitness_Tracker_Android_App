@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.crowcode.fitnessy" />
+                  <option name="mobileSdkAppId" value="1:274651814088:android:952eb0a8834d9412526dfd" />
+                  <option name="projectId" value="yat-377-emad" />
+                  <option name="projectNumber" value="274651814088" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

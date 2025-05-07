@@ -15,10 +15,10 @@
         android:theme="@style/Base.Theme.Fitnessy"
         tools:targetApi="31">
         <activity
-            android:name=".Dashboard.UserSetupActivity"
+            android:name=".user.UserSetupActivity"
             android:exported="false" />
         <activity
-            android:name=".Dashboard.DashboardActivity"
+            android:name=".user.DashboardActivity"
             android:exported="true" />
         <activity
             android:name=".auth.SignUpActivity"

@@ -72,6 +72,7 @@ dependencies {
     // firebase
     implementation(platform(libs.firebase.bom)) // Bill of materials, to update any lib version
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 
     // api
     implementation(libs.retrofit)

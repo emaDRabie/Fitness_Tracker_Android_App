@@ -1,4 +1,4 @@
-package com.crowcode.fitnessy.Dashboard
+package com.crowcode.fitnessy.user
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

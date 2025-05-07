@@ -14,8 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.crowcode.fitnessy.Dashboard.DashboardActivity
-import com.crowcode.fitnessy.Dashboard.UserSetupActivity
+import com.crowcode.fitnessy.user.UserSetupActivity
 import com.crowcode.fitnessy.MainActivity
 import com.crowcode.fitnessy.R
 import com.google.firebase.auth.FirebaseAuth
