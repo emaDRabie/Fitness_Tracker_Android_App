@@ -14,9 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.crowcode.fitnessy.user.UserSetupActivity
 import com.crowcode.fitnessy.MainActivity
 import com.crowcode.fitnessy.R
+import com.crowcode.fitnessy.user.DashboardActivity
+import com.crowcode.fitnessy.user.UserSetupActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -30,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -46,12 +48,18 @@ class LoginActivity : AppCompatActivity() {
         val forgotPassTv: TextView = findViewById(R.id.forgot_pass_tv)
         val rememberMeCb: CheckBox = findViewById(R.id.remember_me_cb)
 
+        // Load saved credentials if Remember Me was checked
+        val prefs = getSharedPreferences("user_data", MODE_PRIVATE)
+        emailEt.setText(prefs.getString("email", ""))
+        passEt.setText(prefs.getString("pass", ""))
+
         loginBtn.setOnClickListener {
-            val email = emailEt.text.toString()
-            val pass = passEt.text.toString()
-            val editor = getSharedPreferences("user_data", MODE_PRIVATE).edit()
+            val email = emailEt.text.toString().trim()
+            val pass = passEt.text.toString().trim()
+
+            // Save or clear credentials based on checkbox
+            val editor = prefs.edit()
             if (rememberMeCb.isChecked) {
-                //save data
                 editor.putString("email", email)
                 editor.putString("pass", pass)
             } else {
@@ -59,35 +67,37 @@ class LoginActivity : AppCompatActivity() {
                 editor.putString("pass", "")
             }
             editor.apply()
+
             if (email.isBlank() || pass.isBlank()) {
                 Toast.makeText(this, "Empty field/s", Toast.LENGTH_SHORT).show()
             } else {
                 progress.isVisible = true
-                // login code
                 login(email, pass)
-
             }
         }
+
         notUserTv.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
         }
-        forgotPassTv.setOnClickListener {
-            progress.isVisible = true
-            val email = emailEt.text.toString()
-            Firebase.auth.sendPasswordResetEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "Email sent!", Toast.LENGTH_SHORT).show()
-                    }
-                }
-        }
 
-        val prefs = getSharedPreferences("user_data", MODE_PRIVATE)
-        val e = prefs.getString("email", null)
-        val p = prefs.getString("pass", null)
-        emailEt.setText(e)
-        passEt.setText(p)
+        forgotPassTv.setOnClickListener {
+            val email = emailEt.text.toString().trim()
+            if (email.isNotBlank()) {
+                progress.isVisible = true
+                Firebase.auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
+                        progress.isVisible = false
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Email sent!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Failed to send reset email", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            } else {
+                Toast.makeText(this, "Enter your email", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         val arrowBack = findViewById<ImageButton>(R.id.arrowBack)
         arrowBack.setOnClickListener {
@@ -96,30 +106,37 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finishAffinity() // This closes all activities in the task
-    }
-
     private fun login(email: String, pass: String) {
         auth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, navigate to categories activity
-                    if (auth.currentUser!!.isEmailVerified) {
+                    if (auth.currentUser?.isEmailVerified == true) {
                         Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                        // Start CategoryActivity after successful login
-                        startActivity(Intent(this, UserSetupActivity::class.java))
-                        finish() // Close the login screen
-                    } else
+
+                        // Check if user completed setup
+                        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                        val isSetupComplete = prefs.getBoolean("setup_complete_${auth.currentUser?.uid}", false)
+
+                        if (isSetupComplete) {
+                            startActivity(Intent(this, DashboardActivity::class.java))
+                        } else {
+                            startActivity(Intent(this, UserSetupActivity::class.java))
+                        }
+
+                        finish() // Close login screen
+                    } else {
                         Toast.makeText(this, "CHECK YOUR EMAIL!", Toast.LENGTH_SHORT).show()
-
-                } else
-                // If sign in fails, display a message to the user.
+                    }
+                } else {
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
+                }
                 progress.isVisible = false
-
             }
+    }
+
+    @Deprecated("This method has been deprecated in favor of using the OnBackPressedDispatcher.")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity() // Close entire task
     }
 }

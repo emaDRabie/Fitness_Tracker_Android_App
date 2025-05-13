@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NavTextAppearance" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="NavTextAppearanceSelected" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

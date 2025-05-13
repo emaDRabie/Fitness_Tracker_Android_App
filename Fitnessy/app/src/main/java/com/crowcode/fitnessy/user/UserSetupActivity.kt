@@ -1,6 +1,7 @@
 package com.crowcode.fitnessy.user
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.crowcode.fitnessy.R
 import com.crowcode.fitnessy.databinding.ActivityUserSetupBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
@@ -19,8 +21,26 @@ import java.util.Date
 import java.util.Locale
 
 class UserSetupActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val currentUser = Firebase.auth.currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val setupKey = "setup_complete_${currentUser.uid}"
+
+        if (prefs.getBoolean(setupKey, false)) {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+            return
+        }
+
         val binding = ActivityUserSetupBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
@@ -30,7 +50,7 @@ class UserSetupActivity : AppCompatActivity() {
             insets
         }
 
-        // date picker
+        // Date picker
         val calendar = Calendar.getInstance()
         binding.dobEt.setOnClickListener {
             val year = calendar.get(Calendar.YEAR)
@@ -38,13 +58,12 @@ class UserSetupActivity : AppCompatActivity() {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePicker = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
+                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
                 binding.dobEt.setText(selectedDate)
             }, year, month, day)
 
             datePicker.show()
         }
-
 
         binding.confirmButton.setOnClickListener {
             binding.progress.isVisible = true
@@ -85,8 +104,18 @@ class UserSetupActivity : AppCompatActivity() {
                     .add(trainee)
                     .addOnSuccessListener {
                         it.update("id", it.id)
-                        Toast.makeText(this, "Added successfully", Toast.LENGTH_SHORT).show()
+
+                        // ✅ Mark setup as completed for the current user
+                        prefs.edit()
+                            .putBoolean(setupKey, true)
+                            .apply()
+
+                        Toast.makeText(this, "Setup complete!", Toast.LENGTH_SHORT).show()
                         binding.progress.isVisible = false
+
+                        // ✅ Navigate to DashboardActivity
+                        startActivity(Intent(this, DashboardActivity::class.java))
+                        finish()
                     }
                     .addOnFailureListener {
                         Toast.makeText(this, "Failed: ${it.message}", Toast.LENGTH_SHORT).show()
@@ -98,6 +127,5 @@ class UserSetupActivity : AppCompatActivity() {
                 binding.progress.isVisible = false
             }
         }
-
     }
 }

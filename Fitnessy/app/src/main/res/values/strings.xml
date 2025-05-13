@@ -15,4 +15,8 @@
     <string name="display_name">Display Name</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="set_your_goals">Set your goals!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_nutrition_score_with_buttons">NutritionScoreWithButtons</string>
+    <string name="title_activity_last30_days_graph">Last30DaysGraph</string>
+    <string name="title_activity_health_dashboard_preview">HealthDashboardPreview</string>
 </resources>

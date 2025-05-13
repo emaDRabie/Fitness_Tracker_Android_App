@@ -15,6 +15,9 @@
         android:theme="@style/Base.Theme.Fitnessy"
         tools:targetApi="31">
         <activity
+            android:name=".user.VideoPlayerActivity"
+            android:exported="false" />
+        <activity
             android:name=".user.UserSetupActivity"
             android:exported="true" />
         <activity
