@@ -11,7 +11,6 @@ class OnboardingActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         installSplashScreen().setKeepOnScreenCondition { true }
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
