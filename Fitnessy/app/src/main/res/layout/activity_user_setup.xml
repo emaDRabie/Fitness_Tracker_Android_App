@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/weight_icon"
             android:drawablePadding="12dp"
-            android:hint="Weight"
+            android:hint="Weight kg"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/height_icon"
             android:drawablePadding="12dp"
-            android:hint="Height"
+            android:hint="Height cm"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -164,7 +164,7 @@
             android:button="@null"
             android:gravity="center"
             android:text="Female"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/male"
@@ -178,7 +178,7 @@
             android:button="@null"
             android:gravity="center"
             android:text="Male"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
     </RadioGroup>
 
@@ -225,7 +225,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/water_icon"
             android:drawablePadding="12dp"
-            android:hint="Water"
+            android:hint="Water ml"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
