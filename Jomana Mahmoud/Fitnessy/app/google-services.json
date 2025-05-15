@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "274651814088",
+    "project_id": "yat-377-emad",
+    "storage_bucket": "yat-377-emad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274651814088:android:952eb0a8834d9412526dfd",
+        "android_client_info": {
+          "package_name": "com.crowcode.fitnessy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1AhRk5bbph8rjijIV5Uh_vouQ3SGAurc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274651814088:android:760b527a08081578526dfd",
+        "android_client_info": {
+          "package_name": "com.example.dealingwithfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1AhRk5bbph8rjijIV5Uh_vouQ3SGAurc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
