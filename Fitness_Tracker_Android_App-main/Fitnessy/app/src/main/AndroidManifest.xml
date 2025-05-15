@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Base.Theme.Fitnessy"
+        tools:targetApi="31">
+        <activity
+            android:name=".user.PrivacyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user.VideoPlayerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user.UserSetupActivity"
+            android:exported="true" />
+        <activity
+            android:name=".user.DashboardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".auth.SignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".auth.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".onboard.OnboardingActivity"
+            android:exported="true"
+            android:label=""
+            android:theme="@style/SplashTheme"> <!-- Updated theme here -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>

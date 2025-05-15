@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Fitnessy</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+    <string name="email">Email</string>
+    <string name="password">Password\n</string>
+    <string name="login">Login</string>
+    <string name="already_a_user">Already have an account?</string>
+    <string name="sign_up">Create Account</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="forgot_your_password">Forgot password?</string>
+    <string name="not_a_user">Not a user?</string>
+    <string name="welcome_back_to_fitnessy">Welcome Back To Fitnessy!</string>
+    <string name="create_user">Create User</string>
+    <string name="let_s_get_started">Let\'s get started!</string>
+    <string name="display_name">Display Name</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="set_your_goals">Set your goals!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_nutrition_score_with_buttons">NutritionScoreWithButtons</string>
+    <string name="title_activity_last30_days_graph">Last30DaysGraph</string>
+    <string name="title_activity_health_dashboard_preview">HealthDashboardPreview</string>
+</resources>
