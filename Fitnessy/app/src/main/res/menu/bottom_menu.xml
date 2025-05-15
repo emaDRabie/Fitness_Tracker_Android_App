@@ -7,10 +7,6 @@
         android:title="Summary"/>
 
     <item
-        android:id="@+id/nav_sharing"
-        android:icon="@drawable/sharing"
-        android:title="Sharing"/>
-    <item
         android:id="@+id/nav_fitness"
         android:icon="@drawable/fitness_body"
         android:title="Fitness body"/>
