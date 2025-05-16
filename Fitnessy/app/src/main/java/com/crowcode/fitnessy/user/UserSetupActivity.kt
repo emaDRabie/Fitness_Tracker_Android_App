@@ -1,5 +1,6 @@
 package com.crowcode.fitnessy.user
 
+import Trainee
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -50,7 +51,6 @@ class UserSetupActivity : AppCompatActivity() {
             insets
         }
 
-        // Date picker
         val calendar = Calendar.getInstance()
         binding.dobEt.setOnClickListener {
             val year = calendar.get(Calendar.YEAR)
@@ -68,13 +68,13 @@ class UserSetupActivity : AppCompatActivity() {
         binding.confirmButton.setOnClickListener {
             binding.progress.isVisible = true
 
-            val name = binding.displayNameEt.text.toString()
-            val dobStr = binding.dobEt.text.toString()
-            val weightStr = binding.weightEt.text.toString()
-            val heightStr = binding.heightEt.text.toString()
-            val waterStr = binding.waterEt.text.toString()
-            val cal = binding.calEt.text.toString()
-            val tWeight = binding.tWeightEt.text.toString()
+            val name = binding.displayNameEt.text.toString().trim()
+            val dobStr = binding.dobEt.text.toString().trim()
+            val weightStr = binding.weightEt.text.toString().trim()
+            val heightStr = binding.heightEt.text.toString().trim()
+            val waterStr = binding.waterEt.text.toString().trim()
+            val cal = binding.calEt.text.toString().trim()
+            val tWeight = binding.tWeightEt.text.toString().trim()
             val selectedGenderId = binding.toggleGender.checkedRadioButtonId
             val selectedGender = findViewById<RadioButton>(selectedGenderId)?.text.toString()
 
@@ -88,6 +88,7 @@ class UserSetupActivity : AppCompatActivity() {
 
             try {
                 val dob = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(dobStr)
+
                 val trainee = Trainee(
                     name = name,
                     dob = dob ?: Date(),
@@ -105,15 +106,22 @@ class UserSetupActivity : AppCompatActivity() {
                     .addOnSuccessListener {
                         it.update("id", it.id)
 
-                        // ✅ Mark setup as completed for the current user
-                        prefs.edit()
-                            .putBoolean(setupKey, true)
-                            .apply()
+                        val editor = prefs.edit()
+                        editor.putBoolean(setupKey, true)
+                        editor.putString("name", name)
+                        editor.putFloat("weight", weightStr.toFloat())
+                        editor.putFloat("height", heightStr.toFloat())
+                        editor.putFloat("waterGoal", waterStr.toFloat())
+                        editor.putString("calGoal", cal)
+                        editor.putString("weightGoal", tWeight)
+                        editor.putString("gender", selectedGender)
+                        editor.putString("dob", dobStr)
+                        editor.putString("email", currentUser.email ?: "")
+                        editor.apply()
 
                         Toast.makeText(this, "Setup complete!", Toast.LENGTH_SHORT).show()
                         binding.progress.isVisible = false
 
-                        // ✅ Navigate to DashboardActivity
                         startActivity(Intent(this, DashboardActivity::class.java))
                         finish()
                     }

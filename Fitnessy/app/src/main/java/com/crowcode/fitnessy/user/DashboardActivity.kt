@@ -28,7 +28,6 @@ class DashboardActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener {
             val fragment = when (it.itemId) {
                 R.id.nav_summary -> SummaryFragment()
-                R.id.nav_sharing -> SharingFragment()
                 R.id.nav_fitness -> FitnessBodyFragment()
                 R.id.nav_profile -> ProfileFragment()
                 else -> null

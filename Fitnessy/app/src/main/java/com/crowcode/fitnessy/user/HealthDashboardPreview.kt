@@ -32,12 +32,14 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.crowcode.fitnessy.user.UserSession.userData
 
 
 @Preview(showBackground = true)
@@ -50,8 +52,18 @@ fun HealthDashboardPreview() {
 
 @Composable
 fun HealthDashboardScreen() {
-    var calorieScore by remember { mutableIntStateOf(500) }
-    var waterScore by remember { mutableIntStateOf(850) }
+    val context = LocalContext.current
+    UserSession.load(context)
+    val userData = UserSession.userData
+
+    val name = userData?.name ?: "Guest"
+    var calorieScore by remember {
+        mutableIntStateOf(userData?.calGoal?.toIntOrNull() ?: 0)
+    }
+    var waterScore by remember {
+        mutableIntStateOf(userData?.waterGoal?.toInt() ?: 0)
+    }
+
 
     Column(
         modifier = Modifier
@@ -59,10 +71,9 @@ fun HealthDashboardScreen() {
             .padding(16.dp)
             .background(Color.White)
     ) {
-        Text(text = "Profile Name", fontSize = 20.sp)
+        Text(text = "Hello, $name", fontSize = 20.sp)
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Pass calorieScore and waterScore to the MetricsSection
         NutritionScoreWithButtons(calorieScore, waterScore) { newCalories, newWater ->
             calorieScore = newCalories
             waterScore = newWater
@@ -70,13 +81,12 @@ fun HealthDashboardScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Pass calorieScore and waterScore to update MetricItem in the MetricsSection
         MetricsSection(calorieScore, waterScore)
 
         Last30DaysGraph()
-
     }
 }
+
 
 
 @Composable
@@ -89,7 +99,8 @@ fun MetricsSection(calorieScore: Int, waterScore: Int) {
         MetricItem(label = "Calories", value = "$calorieScore cal")
 
         MetricItem(label = "Water", value = "$waterScore ml")
-        MetricItem(label = "Weight", value = "58 kg")
+        MetricItem(label = "Weight", value = "${userData?.weight?.toInt() ?: 0} kg")
+
     }
 }
 
@@ -114,8 +125,8 @@ fun NutritionScoreWithButtons(
     initialWater: Int,
     onScoreChange: (Int, Int) -> Unit
 ) {
-    var calorieScore by remember { mutableIntStateOf(initialCalorie) }
-    var waterScore by remember { mutableIntStateOf(initialWater) }
+    var calorieScore by remember { mutableIntStateOf(userData?.calGoal?.toIntOrNull() ?: 0) }
+    var waterScore by remember { mutableIntStateOf(userData?.waterGoal?.toInt() ?: 0) }
 
     Column(
         modifier = Modifier.padding(16.dp),
